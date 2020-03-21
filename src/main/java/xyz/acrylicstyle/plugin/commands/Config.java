@@ -31,7 +31,7 @@ public class Config extends OpSubCommandExecutor {
             PluginManager.config.setLanguage(args[1]);
             String lang = PluginManagerConfig.getStringStatic("language");
             String native_lang = PluginManagerConfig.getStringStatic("native_language");
-            sender.sendMessage(String.format(PluginManagerConfig.getStringStatic("pman_config_language_success"), lang, native_lang));
+            sender.sendMessage(ChatColor.GREEN + String.format(PluginManagerConfig.getStringStatic("pman_config_language_success"), lang, native_lang));
         } else $sendMessage(sender);
     }
 
