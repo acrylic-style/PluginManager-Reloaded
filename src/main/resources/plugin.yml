@@ -1,4 +1,4 @@
-name: PluginManager-Reloaded
+name: PluginManager
 main: xyz.acrylicstyle.plugin.PluginManager
 version: 0.0.1
 commands:
