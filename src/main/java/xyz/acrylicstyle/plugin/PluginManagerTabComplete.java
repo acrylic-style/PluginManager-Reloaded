@@ -38,15 +38,15 @@ public class PluginManagerTabComplete implements TabCompleter {
         if (args.length == 0) return commands;
         if (args.length == 1) return filterArgsList(commands, args[0]);
         if (args.length == 2) {
-            if (args[1].equalsIgnoreCase("unload")
-                    || args[1].equalsIgnoreCase("disable")
-                    || args[1].equalsIgnoreCase("reload")) return filterArgsList(getAllLoadedPluginNames(), args[1]);
-            if (args[1].equalsIgnoreCase("load")) return filterArgsList(getPlugins(), args[1]);
-            if (args[1].equalsIgnoreCase("config")) return filterArgsList(Collections.singletonList("language"), args[1]);
+            if (args[0].equalsIgnoreCase("unload")
+                    || args[0].equalsIgnoreCase("disable")
+                    || args[0].equalsIgnoreCase("reload")) return filterArgsList(getAllLoadedPluginNames(), args[1]);
+            if (args[0].equalsIgnoreCase("load")) return filterArgsList(getPlugins(), args[1]);
+            if (args[0].equalsIgnoreCase("config")) return filterArgsList(Collections.singletonList("language"), args[1]);
         }
         if (args.length == 3) {
-            if (args[1].equalsIgnoreCase("config")) {
-                if (args[2].equalsIgnoreCase("language")) return filterArgsList(PluginManager.languages, args[2]);
+            if (args[0].equalsIgnoreCase("config")) {
+                if (args[1].equalsIgnoreCase("language")) return filterArgsList(PluginManager.languages, args[2]);
             }
         }
         return emptyList;
