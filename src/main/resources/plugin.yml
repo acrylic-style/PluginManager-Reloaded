@@ -1,0 +1,9 @@
+name: PluginManager-Reloaded
+main: xyz.acrylicstyle.plugin.PluginManager
+version: 0.0.1
+commands:
+  pman:
+    description: "Plugin Manager"
+    usage: "/<command>"
+    permission: pluginmanager.root_command
+    aliases: ["pm"]
