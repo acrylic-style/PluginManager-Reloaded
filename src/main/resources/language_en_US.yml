@@ -1,1 +1,36 @@
-no_permission: "&cYou don't have permission to do this."
+# in English
+language: "English"
+
+# in native language
+native_language: "English"
+
+no_permission: "You don't have permission to do this."
+
+pman_load: "Loads plugin."
+pman_load_invalid_file: "Please specify a valid file."
+pman_load_invalid: "This plugin is an invalid plugin."
+pman_load_success: "Plugin %s has been successfully enabled."
+
+pman_enable: "Disables plugin."
+pman_enable_invalid_plugin: "Please specify a valid plugin."
+pman_enable_fail: "Failed to disable the plugin %s."
+pman_enable_success: "%s has been successfully disabled."
+
+pman_disable: "Disables plugin."
+pman_disable_invalid_plugin: "Please specify a valid plugin."
+pman_disable_fail: "Failed to disable the plugin %s."
+pman_disable_success: "%s has been successfully disabled."
+
+pman_unload: "Unloads plugin."
+pman_unload_invalid_plugin: "Please specify a valid plugin."
+pman_unload_fail: "Failed to unload the plugin %s."
+pman_unload_success: "%s has been successfully unloaded."
+
+pman_reload: "Reloads plugin."
+pman_reload_invalid_plugin: "Please specify a valid plugin."
+pman_reload_fail: "Failed to reload the plugin %s."
+pman_reload_success: "Successfully reloaded the plugin %s."
+
+pman_config_language: "Set the languages that PluginManager will use."
+pman_config_language_invalid_language: "Invalid language was specified."
+pman_config_language_success: "Language was successfully set to %s (%s)."
