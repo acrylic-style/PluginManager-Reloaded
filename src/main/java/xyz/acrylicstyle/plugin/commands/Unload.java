@@ -8,13 +8,13 @@ import util.ReflectionHelper;
 import xyz.acrylicstyle.plugin.PluginManagerConfig;
 import xyz.acrylicstyle.plugin.PluginManagerTabComplete;
 import xyz.acrylicstyle.plugin.utils.PluginUtils;
-import xyz.acrylicstyle.tomeito_core.command.OpCommandExecutor;
+import xyz.acrylicstyle.tomeito_core.subcommand.OpSubCommandExecutor;
 import xyz.acrylicstyle.tomeito_core.subcommand.SubCommand;
 
 import java.lang.reflect.InvocationTargetException;
 
 @SubCommand(name = "unload", usage = "/pman unload <Plugin>", description = "Unloads a plugin.")
-public class Unload extends OpCommandExecutor {
+public class Unload extends OpSubCommandExecutor {
     @Override
     public void onCommand(CommandSender sender, String[] args) {
         if (!sender.hasPermission("pluginmanager.unload")) {

@@ -4,11 +4,11 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import xyz.acrylicstyle.plugin.PluginManager;
 import xyz.acrylicstyle.plugin.PluginManagerConfig;
-import xyz.acrylicstyle.tomeito_core.command.OpCommandExecutor;
+import xyz.acrylicstyle.tomeito_core.subcommand.OpSubCommandExecutor;
 import xyz.acrylicstyle.tomeito_core.subcommand.SubCommand;
 
 @SubCommand(name = "config", usage = "/pman config", description = "Changes configuration.")
-public class Config extends OpCommandExecutor {
+public class Config extends OpSubCommandExecutor {
     @Override
     public void onCommand(CommandSender sender, String[] args) {
         if (!sender.hasPermission("pluginmanager.config")) {

@@ -8,14 +8,14 @@ import org.bukkit.plugin.Plugin;
 import util.ReflectionHelper;
 import xyz.acrylicstyle.plugin.PluginManagerConfig;
 import xyz.acrylicstyle.plugin.PluginManagerTabComplete;
-import xyz.acrylicstyle.tomeito_core.command.OpCommandExecutor;
+import xyz.acrylicstyle.tomeito_core.subcommand.OpSubCommandExecutor;
 import xyz.acrylicstyle.tomeito_core.subcommand.SubCommand;
 
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 
-@SubCommand(name = "load", usage = "/pman load <Plugin>", description = "Loads plugin.")
-public class Load extends OpCommandExecutor {
+@SubCommand(name = "load", usage = "/pman load <Plugin>", description = "Load a plugin.")
+public class Load extends OpSubCommandExecutor {
     @Override
     public void onCommand(CommandSender sender, String[] args) {
         if (!sender.hasPermission("pluginmanager.load")) {
