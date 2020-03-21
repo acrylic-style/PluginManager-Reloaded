@@ -10,7 +10,7 @@ import xyz.acrylicstyle.tomeito_core.subcommand.SubCommand;
 @SubCommand(name = "config", usage = "/pman config", description = "Changes configuration.")
 public class Config extends OpSubCommandExecutor {
     @Override
-    public void onCommand(CommandSender sender, String[] args) {
+    public void onOpCommand(CommandSender sender, String[] args) {
         if (!sender.hasPermission("pluginmanager.config")) {
             sender.sendMessage(ChatColor.RED + PluginManagerConfig.getStringStatic("no_permission"));
             return;

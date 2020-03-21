@@ -17,7 +17,7 @@ import java.lang.reflect.InvocationTargetException;
 @SubCommand(name = "load", usage = "/pman load <Plugin>", description = "Load a plugin.")
 public class Load extends OpSubCommandExecutor {
     @Override
-    public void onCommand(CommandSender sender, String[] args) {
+    public void onOpCommand(CommandSender sender, String[] args) {
         if (!sender.hasPermission("pluginmanager.load")) {
             sender.sendMessage(ChatColor.RED + PluginManagerConfig.getStringStatic("no_permission"));
             return;

@@ -16,7 +16,7 @@ import java.lang.reflect.InvocationTargetException;
 @SubCommand(name = "unload", usage = "/pman unload <Plugin>", description = "Unloads a plugin.")
 public class Unload extends OpSubCommandExecutor {
     @Override
-    public void onCommand(CommandSender sender, String[] args) {
+    public void onOpCommand(CommandSender sender, String[] args) {
         if (!sender.hasPermission("pluginmanager.unload")) {
             sender.sendMessage(ChatColor.RED + PluginManagerConfig.getStringStatic("no_permission"));
             return;

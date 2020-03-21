@@ -16,7 +16,7 @@ import java.lang.reflect.InvocationTargetException;
 @SubCommand(name = "reload", usage = "/pman reload <Plugin>", description = "Reload a plugin.")
 public class Reload extends OpSubCommandExecutor {
     @Override
-    public void onCommand(CommandSender sender, String[] args) {
+    public void onOpCommand(CommandSender sender, String[] args) {
         if (!sender.hasPermission("pluginmanager.reload")) {
             sender.sendMessage(ChatColor.RED + PluginManagerConfig.getStringStatic("no_permission"));
             return;

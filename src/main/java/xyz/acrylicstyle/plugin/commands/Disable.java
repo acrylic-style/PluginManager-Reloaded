@@ -16,7 +16,7 @@ import java.lang.reflect.InvocationTargetException;
 @SubCommand(name = "disable", usage = "/pman disable <plugin>", description = "Disables a plugin.")
 public class Disable extends OpSubCommandExecutor {
     @Override
-    public void onCommand(CommandSender sender, String[] args) {
+    public void onOpCommand(CommandSender sender, String[] args) {
         if (!sender.hasPermission("pluginmanager.disable")) {
             sender.sendMessage(ChatColor.RED + PluginManagerConfig.getStringStatic("no_permission"));
             return;
