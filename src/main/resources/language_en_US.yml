@@ -11,10 +11,10 @@ pman_load_invalid_file: "Please specify a valid file."
 pman_load_invalid: "This plugin is an invalid plugin."
 pman_load_success: "Plugin %s has been successfully enabled."
 
-pman_enable: "Disables plugin."
+pman_enable: "Enables plugin."
 pman_enable_invalid_plugin: "Please specify a valid plugin."
-pman_enable_fail: "Failed to disable the plugin %s."
-pman_enable_success: "%s has been successfully disabled."
+pman_enable_fail: "Failed to enable the plugin %s."
+pman_enable_success: "%s has been successfully enabled."
 
 pman_disable: "Disables plugin."
 pman_disable_invalid_plugin: "Please specify a valid plugin."
