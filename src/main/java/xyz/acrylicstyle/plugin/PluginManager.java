@@ -25,7 +25,7 @@ public class PluginManager extends JavaPlugin {
             @Override
             public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
                 if (!sender.isOp()) {
-                    sender.sendMessage();
+                    //sender.sendMessage();
                 }
                 return true;
             }
