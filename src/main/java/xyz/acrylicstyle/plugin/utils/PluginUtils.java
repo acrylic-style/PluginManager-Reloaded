@@ -82,8 +82,8 @@ public class PluginUtils {
 
     public static void reload(Plugin plugin) {
         if (plugin != null) {
-            load(plugin);
             unload(plugin);
+            load(plugin);
         }
     }
 
@@ -123,7 +123,6 @@ public class PluginUtils {
                 Field knownCommandsField = SimpleCommandMap.class.getDeclaredField("knownCommands");
                 knownCommandsField.setAccessible(true);
                 commands = (Map<String, Command>) knownCommandsField.get(commandMap);
-
             } catch (ReflectiveOperationException e) {
                 e.printStackTrace();
                 return ChatColor.RED + String.format(PluginManagerConfig.getStringStatic("pman_unload_fail"), plugin.getName());

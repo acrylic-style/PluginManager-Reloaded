@@ -8,8 +8,8 @@ import util.ReflectionHelper;
 import xyz.acrylicstyle.plugin.PluginManagerConfig;
 import xyz.acrylicstyle.plugin.PluginManagerTabComplete;
 import xyz.acrylicstyle.plugin.utils.PluginUtils;
-import xyz.acrylicstyle.tomeito_core.subcommand.OpSubCommandExecutor;
-import xyz.acrylicstyle.tomeito_core.subcommand.SubCommand;
+import xyz.acrylicstyle.tomeito_api.subcommand.OpSubCommandExecutor;
+import xyz.acrylicstyle.tomeito_api.subcommand.SubCommand;
 
 import java.lang.reflect.InvocationTargetException;
 

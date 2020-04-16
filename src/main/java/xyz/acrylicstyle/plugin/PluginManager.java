@@ -4,8 +4,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.plugin.java.JavaPlugin;
-import xyz.acrylicstyle.tomeito_core.TomeitoLib;
-import xyz.acrylicstyle.tomeito_core.utils.Lang;
+import xyz.acrylicstyle.tomeito_api.TomeitoAPI;
+import xyz.acrylicstyle.tomeito_api.utils.Lang;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -37,7 +37,7 @@ public class PluginManager extends JavaPlugin {
             e.printStackTrace();
         }
         Bukkit.getPluginCommand("pman").setTabCompleter(new PluginManagerTabComplete());
-        TomeitoLib.registerCommands(this.getClassLoader(), "pman", "xyz.acrylicstyle.plugin.commands", (sender, command, label, args) -> {
+        TomeitoAPI.getInstance().registerCommands(this.getClassLoader(), "pman", "xyz.acrylicstyle.plugin.commands", (sender, command, label, args) -> {
             if (!sender.isOp()) {
                 sender.sendMessage(ChatColor.RED + PluginManagerConfig.getStringStatic("no_permission"));
                 return false;

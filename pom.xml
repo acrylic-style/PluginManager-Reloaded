@@ -62,8 +62,8 @@
     <dependencies>
         <dependency>
             <groupId>xyz.acrylicstyle</groupId>
-            <artifactId>tomeito_lib</artifactId>
-            <version>0.1.45</version>
+            <artifactId>tomeito_plugin</artifactId>
+            <version>0.3.1</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>

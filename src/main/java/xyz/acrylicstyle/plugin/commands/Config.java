@@ -4,8 +4,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import xyz.acrylicstyle.plugin.PluginManager;
 import xyz.acrylicstyle.plugin.PluginManagerConfig;
-import xyz.acrylicstyle.tomeito_core.subcommand.OpSubCommandExecutor;
-import xyz.acrylicstyle.tomeito_core.subcommand.SubCommand;
+import xyz.acrylicstyle.tomeito_api.subcommand.OpSubCommandExecutor;
+import xyz.acrylicstyle.tomeito_api.subcommand.SubCommand;
 
 @SubCommand(name = "config", usage = "/pman config", description = "Changes configuration.")
 public class Config extends OpSubCommandExecutor {
