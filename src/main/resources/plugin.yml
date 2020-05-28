@@ -1,7 +1,7 @@
 name: PluginManager
 main: xyz.acrylicstyle.plugin.PluginManager
-version: 0.0.2
-softdepend:
+version: 0.0.3
+depend:
   - TomeitoLib
 commands:
   pman:
