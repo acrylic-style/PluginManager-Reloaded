@@ -1,43 +1,34 @@
-package xyz.acrylicstyle.plugin;
+package xyz.acrylicstyle.plugin
 
-import org.bukkit.ChatColor;
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
-import xyz.acrylicstyle.tomeito_api.providers.ConfigProvider;
-import xyz.acrylicstyle.tomeito_api.providers.LanguageProvider;
+import org.bukkit.ChatColor
+import org.jetbrains.annotations.Contract
+import xyz.acrylicstyle.tomeito_api.providers.ConfigProvider
+import xyz.acrylicstyle.tomeito_api.providers.LanguageProvider
 
-public class PluginManagerConfig extends ConfigProvider {
-    public PluginManagerConfig(String path) {
-        super(path);
-    }
+class PluginManagerConfig(path: String?) : ConfigProvider(path!!) {
+    var language: String?
+        get() = this.getString("language", "en_US")
+        set(language) {
+            this["language"] = language
+        }
+    val currentLanguage: LanguageProvider
+        get() = PluginManager.lang[language]
 
-    @NotNull
-    @Contract("_ -> new")
-    public static PluginManagerConfig newInstance(@NotNull String path) {
-        return new PluginManagerConfig(path);
-    }
+    companion object {
+        @Contract("_ -> new")
+        fun newInstance(path: String): PluginManagerConfig {
+            return PluginManagerConfig(path)
+        }
 
-    public String getLanguage() {
-        return this.getString("language", "en_US");
-    }
+        val currentLanguageStatic: LanguageProvider
+            get() = PluginManager.config.currentLanguage
 
-    public static LanguageProvider getCurrentLanguageStatic() {
-        return PluginManager.config.getCurrentLanguage();
-    }
+        fun getStringStatic(key: String?): String {
+            return ChatColor.translateAlternateColorCodes('&', currentLanguageStatic.getString(key))
+        }
 
-    public static String getStringStatic(String key) {
-        return ChatColor.translateAlternateColorCodes('&', getCurrentLanguageStatic().getString(key));
-    }
-
-    public static String getStringStatic(String key, String def) {
-        return ChatColor.translateAlternateColorCodes('&', getCurrentLanguageStatic().getString(key, def));
-    }
-
-    public LanguageProvider getCurrentLanguage() {
-        return PluginManager.lang.get(getLanguage());
-    }
-
-    public void setLanguage(String language) {
-        this.set("language", language);
+        fun getStringStatic(key: String?, def: String?): String {
+            return ChatColor.translateAlternateColorCodes('&', currentLanguageStatic.getString(key, def))
+        }
     }
 }
