@@ -6,7 +6,6 @@ import org.bukkit.command.CommandSender
 import org.bukkit.command.TabCompleter
 import org.bukkit.plugin.Plugin
 import org.bukkit.plugin.PluginDescriptionFile
-import util.CollectionList
 import util.ICollectionList
 import java.io.File
 import java.util.ArrayList
@@ -31,19 +30,19 @@ class PluginManagerTabCompleter : TabCompleter {
         return emptyList
     }
 
-    private fun filterArgsList(list: List<String>, s: String): CollectionList<String> {
+    private fun filterArgsList(list: List<String>, s: String): ICollectionList<String> {
         return filterArgsList(ICollectionList.asList(list), s)
     }
 
-    private fun filterArgsList(list: CollectionList<String>, s: String): CollectionList<String> {
+    private fun filterArgsList(list: ICollectionList<String>, s: String): ICollectionList<String> {
         return list.filter { s2: String -> s2.toLowerCase().replace(".*:(.*)".toRegex(), "$1").startsWith(s.toLowerCase()) }
     }
 
     companion object {
         var commands = listOf("load", "unload", "disable", "reload", "config")
-        val plugins: CollectionList<String>
+        val plugins: ICollectionList<String>
             get() = ICollectionList.asList(File("./plugins/").listFiles()!!).filter { obj: File -> obj.isFile }.map { obj: File -> obj.name }.map { s: String -> s.replace("\\.jar".toRegex(), "") }
-        val allLoadedPluginNames: CollectionList<String>
+        val allLoadedPluginNames: ICollectionList<String>
             get() = ICollectionList.asList(Bukkit.getPluginManager().plugins)
                 .map { obj: Plugin -> obj.description }
                 .map { obj: PluginDescriptionFile -> obj.name }

@@ -9,7 +9,7 @@
     <version>0.0.3</version>
 
     <properties>
-        <kotlin.version>1.4.10</kotlin.version>
+        <kotlin.version>1.4.21</kotlin.version>
     </properties>
 
 
@@ -112,8 +112,8 @@
     <dependencies>
         <dependency>
             <groupId>xyz.acrylicstyle</groupId>
-            <artifactId>tomeito_plugin</artifactId>
-            <version>0.5.9</version>
+            <artifactId>api</artifactId>
+            <version>0.7.2</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
