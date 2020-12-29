@@ -34,6 +34,9 @@ class Disable : OpSubCommandExecutor() {
             e.printStackTrace()
             return
         }
+        try {
+            Bukkit.getServer().javaClass.getMethod("syncCommands").invoke(Bukkit.getServer())
+        } catch (ignore: ReflectiveOperationException) {}
         sender.sendMessage(ChatColor.GREEN + java.lang.String.format(PluginManagerConfig.getStringStatic("pman_disable_success"), args[0]))
     }
 

@@ -34,6 +34,9 @@ class Enable : OpSubCommandExecutor() {
             e.printStackTrace()
             return
         }
+        try {
+            Bukkit.getServer().javaClass.getMethod("syncCommands").invoke(Bukkit.getServer())
+        } catch (ignore: ReflectiveOperationException) {}
         sender.sendMessage(ChatColor.GREEN + String.format(PluginManagerConfig.getStringStatic("pman_enable_success"), args[0]))
     }
 

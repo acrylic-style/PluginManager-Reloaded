@@ -33,6 +33,9 @@ class Reload : OpSubCommandExecutor() {
             sender.sendMessage(ChatColor.RED.toString() + String.format(PluginManagerConfig.getStringStatic("pman_reload_fail"), args[0]))
             return
         }
+        try {
+            Bukkit.getServer().javaClass.getMethod("syncCommands").invoke(Bukkit.getServer())
+        } catch (ignore: ReflectiveOperationException) {}
         sender.sendMessage(ChatColor.GREEN.toString() + String.format(PluginManagerConfig.getStringStatic("pman_reload_success"), args[0]))
     }
 

@@ -28,6 +28,9 @@ class Unload : OpSubCommandExecutor() {
         }
         try {
             sender.sendMessage(unload(args[0]))
+            try {
+                Bukkit.getServer().javaClass.getMethod("syncCommands").invoke(Bukkit.getServer())
+            } catch (ignore: ReflectiveOperationException) {}
         } catch (e: Exception) {
             e.printStackTrace()
             sender.sendMessage(ChatColor.RED.toString() + String.format(PluginManagerConfig.getStringStatic("pman_reload_fail"), args[0]))
