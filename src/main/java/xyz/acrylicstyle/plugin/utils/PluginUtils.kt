@@ -8,16 +8,11 @@ import org.bukkit.command.SimpleCommandMap
 import org.bukkit.event.Event
 import org.bukkit.plugin.InvalidDescriptionException
 import org.bukkit.plugin.Plugin
-import org.bukkit.plugin.PluginDescriptionFile
 import org.bukkit.plugin.RegisteredListener
-import util.ReflectionHelper
 import xyz.acrylicstyle.plugin.PluginManager
 import xyz.acrylicstyle.plugin.PluginManagerConfig
-import xyz.acrylicstyle.plugin.PluginManagerTabCompleter.Companion.plugins
 import java.io.File
-import java.io.IOException
 import java.net.URLClassLoader
-import java.util.Objects
 import java.util.SortedSet
 import java.util.logging.Level
 import java.util.logging.Logger
@@ -39,40 +34,44 @@ object PluginUtils {
         if (plugin != null && !plugin.isEnabled) Bukkit.getPluginManager().enablePlugin(plugin)
     }
 
-    fun load(plugin: Plugin?): String {
+    private fun load(plugin: Plugin?): String {
         return load(plugin?.name)
     }
 
     fun load(name: String?): String {
-        if (name == null || !plugins.contains(name)) {
-            return ChatColor.RED.toString() + PluginManagerConfig.getStringStatic("pman_load_invalid_file")
+        if (name == null || name.contains("[.,/\\\\:;^~=]".toRegex())) {
+            return "${ChatColor.RED}${PluginManagerConfig.getString("pman_load_invalid_file")}"
         }
         var file = File("./plugins/$name.jar")
-        if (!file.isFile) {
-            for (f in Objects.requireNonNull(File("./plugins/").listFiles())) {
+        if (!file.exists() || !file.isFile) {
+            for (f in File("./plugins/").listFiles()!!) {
                 if (f.name.endsWith(".jar")) {
                     try {
-                        val desc: PluginDescriptionFile = PluginManager.instance!!.pluginLoader.getPluginDescription(f)
+                        val desc = PluginManager.instance.pluginLoader.getPluginDescription(f)
                         if (desc.name.equals(name, ignoreCase = true)) {
                             file = f
                             break
                         }
                     } catch (e: InvalidDescriptionException) {
-                        return ChatColor.RED.toString() + PluginManagerConfig.getStringStatic("pman_load_invalid_file")
+                        return ChatColor.RED.toString() + PluginManagerConfig.getString("pman_load_invalid_file")
                     }
                 }
             }
         }
-        val plugin: Plugin
-        try {
-            plugin = Bukkit.getPluginManager().loadPlugin(file)
-            plugin.onLoad()
-            Bukkit.getPluginManager().enablePlugin(plugin)
+        if (!file.exists() || !file.isFile) return "${ChatColor.RED}${PluginManagerConfig.getString("pman_load_invalid_file")}"
+        val plugin = try {
+            Bukkit.getPluginManager().loadPlugin(file).also {
+                it.onLoad()
+                Bukkit.getPluginManager().enablePlugin(it)
+            }
         } catch (e: Exception) {
             e.printStackTrace()
-            return ChatColor.RED.toString() + PluginManagerConfig.getStringStatic("pman_load_invalid")
+            return ChatColor.RED.toString() + PluginManagerConfig.getString("pman_load_invalid")
         }
-        return ChatColor.GREEN.toString() + java.lang.String.format(PluginManagerConfig.getStringStatic("pman_load_success"), plugin.description.name)
+        try {
+            Bukkit.getServer().javaClass.getMethod("syncCommands").apply { isAccessible = true }.invoke(Bukkit.getServer())
+        } catch (ignore: ReflectiveOperationException) {}
+        return ChatColor.GREEN.toString() + java.lang.String.format(PluginManagerConfig.getString("pman_load_success"), plugin.description.name)
     }
 
     fun reload(plugin: Plugin?) {
@@ -86,13 +85,12 @@ object PluginUtils {
         reload(if (name == null) null else Bukkit.getPluginManager().getPlugin(name))
     }
 
-    fun unload(name: String?): String {
-        return unload(if (name == null) null else Bukkit.getPluginManager().getPlugin(name))
+    fun unload(name: String): String {
+        return unload(Bukkit.getPluginManager().getPlugin(name))
     }
 
     @Suppress("UNCHECKED_CAST")
-    fun unload(plugin: Plugin?): String {
-        if (plugin == null) throw NullPointerException("Plugin cannot be null")
+    fun unload(plugin: Plugin): String {
         val name = plugin.name
         val pluginManager = Bukkit.getPluginManager()
         var commandMap: SimpleCommandMap? = null
@@ -119,7 +117,7 @@ object PluginUtils {
                 commands = knownCommandsField[commandMap] as MutableMap<String?, Command>
             } catch (e: ReflectiveOperationException) {
                 e.printStackTrace()
-                return ChatColor.RED.toString() + String.format(PluginManagerConfig.getStringStatic("pman_unload_fail"), plugin.name)
+                return ChatColor.RED.toString() + String.format(PluginManagerConfig.getString("pman_unload_fail"), plugin.name)
             }
         }
         if (plugins != null && plugins.contains(plugin)) plugins.remove(plugin)
@@ -144,15 +142,11 @@ object PluginUtils {
                 ReflectionHelper.setField<ClassLoader>(cl.javaClass, cl, "plugin", null)
                 ReflectionHelper.setField<ClassLoader>(cl.javaClass, cl, "pluginInit", null)
                 cl.close()
-            } catch (ex: IOException) {
-                Logger.getLogger("PluginManager").log(Level.SEVERE, null, ex)
-            } catch (ex: NoSuchFieldException) {
-                Logger.getLogger("PluginManager").log(Level.SEVERE, null, ex)
-            } catch (ex: IllegalAccessException) {
+            } catch (ex: Exception) {
                 Logger.getLogger("PluginManager").log(Level.SEVERE, null, ex)
             }
         }
         System.gc()
-        return ChatColor.GREEN.toString() + java.lang.String.format(PluginManagerConfig.getStringStatic("pman_unload_success"), plugin.name)
+        return ChatColor.GREEN.toString() + String.format(PluginManagerConfig.getString("pman_unload_success"), plugin.name)
     }
 }
