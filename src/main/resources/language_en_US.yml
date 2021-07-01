@@ -7,8 +7,9 @@ native_language: "English"
 no_permission: "You don't have permission to do this."
 
 pman_load: "Loads plugin."
+pman_load_already_loaded: "That plugin is already loaded."
 pman_load_invalid_file: "Please specify a valid file."
-pman_load_invalid: "This plugin is an invalid plugin."
+pman_load_invalid: "That plugin is an invalid plugin."
 pman_load_success: "Plugin %s has been successfully loaded."
 
 pman_enable: "Enables plugin."

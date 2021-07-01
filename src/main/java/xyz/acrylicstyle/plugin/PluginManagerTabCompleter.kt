@@ -15,7 +15,7 @@ class PluginManagerTabCompleter : TabCompleter {
             if (args[0].equals("unload", ignoreCase = true)
                 || args[0].equals("disable", ignoreCase = true)
                 || args[0].equals("reload", ignoreCase = true)) return filterArgsList(allLoadedPluginNames, args[1])
-            if (args[0].equals("load", ignoreCase = true)) return filterArgsList(getPluginNames(), args[1])
+            if (args[0].equals("load", ignoreCase = true)) return filterArgsList(getPluginNames().filterNot { s -> allLoadedPluginNames.contains(s) }, args[1])
             if (args[0].equals("config", ignoreCase = true)) return filterArgsList(listOf("language"), args[1])
         }
         if (args.size == 3) {

@@ -4,6 +4,7 @@ import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.command.CommandSender
 import xyz.acrylicstyle.plugin.PluginManagerConfig
+import xyz.acrylicstyle.plugin.PluginManagerTabCompleter.Companion.allLoadedPluginNames
 import xyz.acrylicstyle.plugin.subcommand.SubCommand
 import xyz.acrylicstyle.plugin.subcommand.SubCommandExecutor
 import xyz.acrylicstyle.plugin.utils.PluginUtils
@@ -19,6 +20,10 @@ class LoadCommand : SubCommandExecutor {
         }
         if (args.isEmpty()) {
             sendMessage(sender)
+            return
+        }
+        if (allLoadedPluginNames.any { it.equals(args[0], true) }) {
+            sender.sendMessage("${ChatColor.RED}${PluginManagerConfig.getString("pman_load_already_loaded")}")
             return
         }
         sender.sendMessage(PluginUtils.load(args[0]))
